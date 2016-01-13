@@ -18,18 +18,14 @@ Until the ```flutter``` tool supports custom services, you'll need a
 custom compiled Flutter engine with the Firebase Mojo service included.
 You can do this adding
 
-    import org.domokit.firebase.FirebaseImpl;
-
-and
-
     registry.register(Firebase.MANAGER.getName(), new ServiceFactory() {
         @Override
         public void connectToService(Context context, Core core, MessagePipeHandle pipe) {
-            Firebase.MANAGER.bind(new FirebaseImpl(context), pipe);
+            Firebase.MANAGER.bind(new org.domokit.firebase.FirebaseImpl(context), pipe);
         }
     });
 
-to ```SkyApplication.java```, and adding
+to the place where other services are registered ```SkyApplication.java```, and adding
 
     "//sky/services/firebase:firebase_lib"
 
