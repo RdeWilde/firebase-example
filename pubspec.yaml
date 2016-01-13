@@ -2,6 +2,6 @@ name: firebase_example
 description: An example Firebase Flutter project.
 dependencies:
   flutter:
-    path: flutter/packages/flutter
+    path: ../flutter/packages/flutter
   firebase:
-    path: firebase-dart
+    path: firebase
