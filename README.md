@@ -4,7 +4,7 @@ An example Firebase Flutter project.
 
 ## Setup
 
-Make sure your checkouts of flutter and firebase-dart are in an adjacent directory.
+Make sure your checkouts of flutter and firebase-dart are in an adjacent directory. You should get your firebase-dart from https://github.com/collinjackson/firebase-flutter and use the ```mojo``` branch for now.
 
 Your copy of Flutter may need to have its 
 packages/flutter/pubspec.yaml edited to point to a built sky_services if the interfaces
