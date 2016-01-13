@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     new MaterialApp(
-      title: "Firebase Demo",
+      title: "Flutter Firebase Example",
       routes: {
         '/': (RouteArguments args) => new FlutterDemo()
       }
@@ -42,7 +42,7 @@ class FlutterDemoState extends State<FlutterDemo> {
   Widget build(BuildContext context) {
     return new Scaffold(
       toolBar: new ToolBar(
-        center: new Text("Flutter Demo")
+        center: new Text("Flutter Firebase Example")
       ),
       body: new Material(
         child: new Center(
