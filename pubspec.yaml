@@ -1,7 +1,7 @@
-name: newproj
-description: A minimal Flutter project.
+name: firebase_example
+description: An example Firebase Flutter project.
 dependencies:
   flutter:
-    path: ../../git/flutter/packages/flutter
+    path: flutter/packages/flutter
   firebase:
-    path: ../../git/firebase-dart
+    path: firebase-dart
