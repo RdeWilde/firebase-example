@@ -52,7 +52,7 @@ class FlutterDemoState extends State<FlutterDemo> {
       floatingActionButton: new FloatingActionButton(
         onPressed: _testFirebase,
         child: new Icon(
-          icon: 'content/add'
+          icon: 'navigation/refresh'
         )
       )
     );
