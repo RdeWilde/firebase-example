@@ -1,13 +1,11 @@
 import 'dart:async';
+import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:sky_services/firebase/firebase.mojom.dart' as mojo;
 
 void main() {
   runApp(
     new MaterialApp(
-      title: "Flutter Demo",
+      title: "Firebase Demo",
       routes: {
         '/': (RouteArguments args) => new FlutterDemo()
       }
@@ -15,26 +13,30 @@ void main() {
   );
 }
 
-class FlutterDemo extends StatelessComponent {
-  Future _onPressed() async {
-    mojo.FirebaseProxy firebase = new mojo.FirebaseProxy.unbound();
+class FlutterDemo extends StatefulComponent {
+  State<FlutterDemo> createState() => new FlutterDemoState();
+}
 
-    print("Demonstrating connection to Firebase...");
-    shell.connectToService("firebase::Firebase", firebase);
-    await firebase.ptr.initWithUrl("https://burning-inferno-5689.firebaseio.com/hello");
-    var result = await firebase.ptr.observeSingleEventOfType(mojo.EventType.EventTypeValue);
-    print("Result: ${result}");
+class FlutterDemoState extends State<FlutterDemo> {
 
-    print("Authenticating...");
-    mojo.FirebaseAuthWithOAuthTokenResponseParams response = await firebase.ptr.authWithOAuthToken(
-      "google",
-      "<PROVIDER TOKEN>"
-    );
-    if (response.error != null) {
-      print("Authentication Failed! ${response.error.code} ${response.error.message}");
-    } else {
-      print("Authenticated successfully with payload: ${response.authData}");
-    }
+  String _result = "Connecting to Firebase...";
+
+  void initState() {
+    super.initState();
+    _testFirebase();
+  }
+
+  Future _testFirebase() async {
+    setState(() {
+      _result = "Reloading from Firebase...";
+    });
+    Firebase firebase = new Firebase("https://burning-inferno-5689.firebaseio.com/");
+    DataSnapshot result = await firebase
+      .child("hello")
+      .once("value");
+    setState(() {
+      _result = "${result.key}, ${result.val()}!";
+    });
   }
 
   Widget build(BuildContext context) {
@@ -44,11 +46,11 @@ class FlutterDemo extends StatelessComponent {
       ),
       body: new Material(
         child: new Center(
-          child: new Text("Hello world!")
+          child: new Text(_result)
         )
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: _onPressed,
+        onPressed: _testFirebase,
         child: new Icon(
           icon: 'content/add'
         )

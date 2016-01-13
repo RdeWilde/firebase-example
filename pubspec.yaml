@@ -3,3 +3,5 @@ description: A minimal Flutter project.
 dependencies:
   flutter:
     path: ../../git/flutter/packages/flutter
+  firebase:
+    path: ../../git/firebase-dart
