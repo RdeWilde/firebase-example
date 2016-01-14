@@ -19,24 +19,31 @@ class FlutterDemo extends StatefulComponent {
 
 class FlutterDemoState extends State<FlutterDemo> {
 
-  String _result = "Connecting to Firebase...";
+  Firebase _firebase;
+  String _result;
 
   void initState() {
     super.initState();
-    _testFirebase();
+    _result = "Connecting to Firebase...";
+    _listen();
   }
 
-  Future _testFirebase() async {
+  Future _listen() async {
+    _firebase = new Firebase("https://burning-inferno-5689.firebaseio.com/")
+      ..child("hello")
+      .onValue
+      .forEach((Event event) {
+        setState(() {
+          _result = "${event.snapshot.key}, ${event.snapshot.val()}!";
+        });
+      });
+  }
+
+  Future _reload() async {
     setState(() {
       _result = "Reloading from Firebase...";
     });
-    Firebase firebase = new Firebase("https://burning-inferno-5689.firebaseio.com/");
-    DataSnapshot result = await firebase
-      .child("hello")
-      .once("value");
-    setState(() {
-      _result = "${result.key}, ${result.val()}!";
-    });
+    _listen();
   }
 
   Widget build(BuildContext context) {
@@ -50,7 +57,7 @@ class FlutterDemoState extends State<FlutterDemo> {
         )
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: _testFirebase,
+        onPressed: _reload,
         child: new Icon(
           icon: 'navigation/refresh'
         )
