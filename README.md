@@ -1,6 +1,6 @@
 # firebase_example
 
-An example Firebase Flutter project.
+An example Flutter project using the Firebase SDK. It should run on both iOS and Android.
 
 ## Setup
 
@@ -16,18 +16,12 @@ have changed recently.
 
 Until the ```flutter``` tool supports custom services, you'll need a
 custom compiled Flutter engine with the Firebase Mojo service included.
-You can do this adding
+You can do this adding a custom dep:
 
-    registry.register(Firebase.MANAGER.getName(), new ServiceFactory() {
-        @Override
-        public void connectToService(Context context, Core core, MessagePipeHandle pipe) {
-            Firebase.MANAGER.bind(new org.domokit.firebase.FirebaseImpl(context), pipe);
-        }
-    });
+    "custom_deps": { "src/third_party/firebase": "https://github.com/collinjackson/firebase-sdk.git@master" }
 
-to the place where other services are registered ```SkyApplication.java```, and adding
+in your .gclient file and running ```gclient sync```.
 
-    "//sky/services/firebase:firebase_lib"
+Then make these changes to your engine (or cherry-pick)
 
-to ```sky/shell/BUILD.gn```
-
+https://github.com/collinjackson/flutter_engine/commit/d7cbc817934dd392866d13f839baef3e997f371f
