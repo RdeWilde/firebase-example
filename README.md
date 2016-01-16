@@ -4,7 +4,7 @@ An example Flutter project using the Firebase SDK. It should run on both iOS and
 
 ## Setup
 
-Make sure your checkouts of flutter and firebase-dart are in an adjacent directory. You should get your firebase-dart from https://github.com/flutter/firebase-dart for now.
+Make sure your checkouts of flutter and firebase-dart are in an adjacent directory. You should get your firebase-dart from https://github.com/collinjackson/firebase-dart/tree/mojo_implementation for now.
 
 Your copy of Flutter may need to have its 
 packages/flutter/pubspec.yaml edited to point to a built sky_services if the interfaces
