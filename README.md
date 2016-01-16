@@ -16,7 +16,7 @@ have changed recently.
 
 Until the ```flutter``` tool supports custom services, you'll need a
 custom compiled Flutter engine with the Firebase Mojo service included.
-You can do this adding a custom dep:
+You can do this by following the [engine building instructions](https://github.com/flutter/engine/blob/master/CONTRIBUTING.md) adding a custom dep:
 
     "custom_deps": { "src/third_party/firebase": "https://github.com/collinjackson/firebase-sdk.git@master" }
 
