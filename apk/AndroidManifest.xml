@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.newproj">
+    package="org.domokit.FirebaseExample">
 
     <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="21" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application android:name="org.domokit.sky.shell.SkyApplication" android:label="newproj">
+    <application android:name="org.domokit.sky.shell.SkyApplication" android:label="FirebaseExample">
         <activity android:name="org.domokit.sky.shell.SkyActivity"
                   android:launchMode="singleTask"
                   android:theme="@android:style/Theme.Black.NoTitleBar"

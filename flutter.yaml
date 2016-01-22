@@ -1,3 +1,5 @@
 name: firebase_example
+services:
+  - firebase
 material-design-icons:
   - name: navigation/refresh
