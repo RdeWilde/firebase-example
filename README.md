@@ -16,7 +16,7 @@ Make sure your checkouts of flutter and firebase-dart are in directories that ar
 
 It should look like this:
 
-<img src="screen.png" width="300" height="533" />
+<img src="screen.png" width="473" height="800" />
 
 ## Building for iOS
 
