@@ -20,11 +20,10 @@ class FlutterDemo extends StatefulComponent {
 class FlutterDemoState extends State<FlutterDemo> {
 
   Firebase _firebase;
-  String _result;
+  dynamic _result;
 
   void initState() {
     super.initState();
-    _result = "Connecting to Firebase...";
     _listen();
   }
 
@@ -34,16 +33,23 @@ class FlutterDemoState extends State<FlutterDemo> {
       .onValue
       .forEach((Event event) {
         setState(() {
-          _result = "${event.snapshot.key}, ${event.snapshot.val()}!";
+          _result = event.snapshot.val();
         });
       });
   }
 
-  Future _reload() async {
+  void _handleActionButtonPressed() {
     setState(() {
-      _result = "Reloading from Firebase...";
+      // TODO(jackson): Use a transaction to ensure atomicity
+      _firebase.child("hello").set({ "count": _result["count"] + 1 });
     });
-    _listen();
+  }
+
+  Widget _buildText() {
+    if (_result == null)
+      return new Text('Connecting to Firebase...');
+    else
+      return new Text("Button press $_result");
   }
 
   Widget build(BuildContext context) {
@@ -53,13 +59,13 @@ class FlutterDemoState extends State<FlutterDemo> {
       ),
       body: new Material(
         child: new Center(
-          child: new Text(_result)
+          child: _buildText()
         )
       ),
       floatingActionButton: new FloatingActionButton(
-        onPressed: _reload,
+        onPressed: _handleActionButtonPressed,
         child: new Icon(
-          icon: 'navigation/refresh'
+          icon: 'content/add'
         )
       )
     );
