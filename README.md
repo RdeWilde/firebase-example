@@ -12,6 +12,12 @@ Make sure your checkouts of flutter and firebase-dart are in directories that ar
 
 ```adb install -r build/app.apk```
 
+```adb shell am start -n org.domokit.FirebaseExample/org.domokit.sky.shell.SkyActivity```
+
+It should look like this:
+
+<img src="screen.png" width="300" height="533" />
+
 ## Building for iOS
 
 Until the ```flutter``` tool supports custom iOS services, you'll
