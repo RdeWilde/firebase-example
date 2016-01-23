@@ -4,7 +4,7 @@ An example Flutter project using the Firebase SDK. It should run on both iOS and
 
 ## Getting Started
 
-Make sure your checkouts of flutter and firebase-dart are in directories that are adjacent to this one. You should get your firebase-dart from https://github.com/flutter/firebase-dart for now. In the firebase-example directory, run ```pub get```
+Make sure your checkouts of flutter and firebase-dart are in directories that are adjacent to this one. You should get your firebase-dart from https://github.com/flutter/firebase-dart for now. In the firebase-example directory, run ```pub get```.
 
 ## Building for Android
 
