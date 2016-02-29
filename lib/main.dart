@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
 
@@ -20,16 +19,28 @@ class FlutterDemo extends StatefulComponent {
 class FlutterDemoState extends State<FlutterDemo> {
 
   Firebase _firebase;
-  dynamic _result;
+  Map<String, int> _result;
+  String _toolbarText;
 
   void initState() {
     super.initState();
+    _toolbarText = "Flutter Firebase Example";
     _listen();
   }
 
-  Future _listen() async {
-    _firebase = new Firebase("https://burning-inferno-5689.firebaseio.com/")
-      ..child("hello")
+  void _listen() {
+    Map<String, String> credentials = {
+      "email": "jackson@google.com",
+      "password": "testing"
+    };
+    _firebase = new Firebase("https://burning-inferno-5689.firebaseio.com/");
+    _firebase.authWithPassword(credentials)
+      .then((Map<String, dynamic> result) {
+        setState(() {
+          _toolbarText = "Logged in as ${result['uid']}";
+        });
+      });
+    _firebase.child("hello")
       .onValue
       .forEach((Event event) {
         setState(() {
@@ -39,10 +50,12 @@ class FlutterDemoState extends State<FlutterDemo> {
   }
 
   void _handleActionButtonPressed() {
-    setState(() {
-      // TODO(jackson): Use a transaction to ensure atomicity
-      _firebase.child("hello").set({ "count": _result["count"] + 1 });
-    });
+    // This should only work if the user is authenticated
+    _result.putIfAbsent("count", () => 0);
+    _firebase.child("hello").set({ "count": _result["count"] + 1 });
+    // _firebase.child("hello").push(value: { "world": true }, onComplete: (error) {
+    //  print("Done! $error");
+    // });
   }
 
   Widget _buildText() {
@@ -55,7 +68,7 @@ class FlutterDemoState extends State<FlutterDemo> {
   Widget build(BuildContext context) {
     return new Scaffold(
       toolBar: new ToolBar(
-        center: new Text("Flutter Firebase Example")
+        center: new Text(_toolbarText)
       ),
       body: new Material(
         child: new Center(
